@@ -1,25 +1,17 @@
-using Nancy;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using Nancy.ViewEngines.Razor;
-
-namespace MyApp
-{
-  public class HomeModule : NancyModule
-  {
-    public HomeModule()
-    {
-
-    }
-
-    public static Dictionary<string, object> ModelMaker()
-    {
-      Dictionary<string, object> model = new Dictionary<string, object> {
-
-      };
-      return model; 
-    }
-  }
+/*html, body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
 }
+
+.content {
+    height: 100%;
+}
+
+.right-side {
+    float: right;
+    width: 50%;
+    background: blue;
+    height: 100%;
+    overflow: scroll;
+}*/

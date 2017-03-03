@@ -1,3 +1,53 @@
 @{
     Layout = "Shared/_Layout.cshtml";
 }
+
+<div class="left-side">
+    <h2>Bands</h2>
+    @if(Model["bands"].Count == 0)
+    {
+        <h4>
+            There are no bands listed
+        </h4>
+    }
+    else
+    {
+        <ul>
+            @foreach(var venue in Model["bands"])
+            {
+                <a href="bands/@band.GetId()"><h4>@band.GetName()</h4></a>
+            }
+        </ul>
+    }
+</div>
+<div class="center-box">
+    <div class="search-box">
+        <div class="nav-wrapper">
+            <form class="" action="/search" method="get">
+                <div class="input-field">
+                    <input id="search" type="search" required>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="right-side">
+    <h2>Venues</h2>
+    @if(Model["venues"].Count == 0)
+    {
+        <h4>
+            There are no venues listed
+        </h4>
+    }
+    else
+    {
+        <ul>
+            @foreach(var venue in Model["venues"])
+            {
+                <a href="venues/@venue.GetId()"><h4>@venue.GetName()</h4></a>
+            }
+        </ul>
+    }
+</div>

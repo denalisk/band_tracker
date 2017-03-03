@@ -152,7 +152,7 @@ namespace BandTrackerApp
         [Fact]
         public void Search_LocateObjectsInDatabase_ReturnList()
         {
-            // This test will check to see if the delete functionality of the program can successfully remove items from the join table
+            // This test will check to see if the database search functionality returns items correctly and accurately
             // arrange
             Band newBand = new Band("Fire");
             newBand.Save();
@@ -160,6 +160,8 @@ namespace BandTrackerApp
             newVenue.Save();
             Venue otherVenue = new Venue("Bosnia");
             otherVenue.Save();
+            Venue otherVenue2 = new Venue("Yugoslav");
+            otherVenue2.Save();
 
             // act
             Dictionary<string, object> searchResults = DB.Search("Bos");
