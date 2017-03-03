@@ -34,21 +34,21 @@ namespace BandTrackerApp
             _id = newId;
         }
 
-        // public bool override Equals(System.Object otherBand)
-        // {
-        //     // This function overrides the built-in Equals Method to ensure it returns true if two band objects are identical
-        //     if (!(otherband is Band))
-        //     {
-        //         return false
-        //     }
-        //     else
-        //     {
-        //         Band newBand = (Band) otherBand;
-        //         bool nameEquality = this.GetName() == newBand.GetName();
-        //         bool idEquality = this.GetId() == newBand.GetId();
-        //         return (nameEquality && idEquality);
-        //     }
-        // }
+        public override bool Equals(System.Object otherBand)
+        {
+            // This function overrides the built-in Equals Method to ensure it returns true if two band objects are identical
+            if (!(otherBand is Band))
+            {
+                return false;
+            }
+            else
+            {
+                Band newBand = (Band) otherBand;
+                bool nameEquality = this.GetName() == newBand.GetName();
+                bool idEquality = this.GetId() == newBand.GetId();
+                return (nameEquality && idEquality);
+            }
+        }
 
         public static List<Band> GetAll()
         {
