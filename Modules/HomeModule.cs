@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Nancy.ViewEngines.Razor;
 
-namespace MyApp
+namespace BandTrackerApp
 {
     public class HomeModule : NancyModule
     {
@@ -14,7 +14,7 @@ namespace MyApp
             Get["/"] = _ =>
             {
                 return View["index.cshtml"];
-            }
+            };
         }
     }
 }

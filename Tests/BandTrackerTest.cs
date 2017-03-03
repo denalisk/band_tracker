@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using Xunit;
 
-namespace MyApp
+namespace BandTrackerApp
 {
-    public class NEWCLASSTEST : IDisposable
+    public class BandTrackerTest : IDisposable
     {
-        public NEWCLASSTEST()
+        public BandTrackerTest()
         {
-            // DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=DATABASENAMEHERE_TEST;Integrated Security=SSPI;";
+            DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=band_tracker_test;Integrated Security=SSPI;";
         }
 
         [Fact]
@@ -24,6 +24,9 @@ namespace MyApp
         }
 
         public void Dispose()
-        // DELETE ALLS GO HERE
+        {
+            Band.DeleteAll();
+            Venue.DeleteAll();
+        }
     }
 }

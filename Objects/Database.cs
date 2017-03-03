@@ -2,7 +2,7 @@ using System.Data;
 using System.Data.SqlClient;
 // using Microsoft.Scripting;
 
-namespace MyApp
+namespace BandTrackerApp
 {
     public class DB
     {
@@ -57,7 +57,7 @@ namespace MyApp
             string sqlCommandString = string.Format("DELETE FROM {0} WHERE id = {1}; ", baseTableName, targetId);
             foreach(string table in tableList)
             {
-                sqlCommandString += string.Format("DELETE FROM {0} WHERE {1}_id = {2}", table, baseTableNameSingular, targetId)
+                sqlCommandString += string.Format("DELETE FROM {0} WHERE {1}_id = {2}", table, baseTableNameSingular, targetId);
             }
             SqlConnection conn = DB.Connection();
             conn.Open();
