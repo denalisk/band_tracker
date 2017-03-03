@@ -31,7 +31,7 @@
             <ul>
                 @foreach(var band in Model["bands"])
                 {
-                    <a href="bands/@band.GetId()"><h4>@band.GetName()</h4></a>
+                    <a href="/bands/@band.GetId()"><h4>@band.GetName()</h4></a>
                 }
             </ul>
         }
@@ -78,7 +78,7 @@
             <ul>
                 @foreach(var venue in Model["venues"])
                 {
-                    <a href="venues/@venue.GetId()"><h4>@venue.GetName()</h4></a>
+                    <a href="/venues/@venue.GetId()"><h4>@venue.GetName()</h4></a>
                 }
             </ul>
         }

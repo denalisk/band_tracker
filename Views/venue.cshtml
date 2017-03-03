@@ -31,6 +31,26 @@
                             </form>
                         </div>
                     </li>
+                    <li>
+                        <div class="collapsible-header">
+                            Edit this Venue
+                        </div>
+                        <div class="collapsible-body center-align">
+                            <div class="form-group">
+                                <form class="" action="/venues/@Model["venue"].GetId()" method="post">
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <input class="form-control" type="text" name="update-venue" placeholder="Rename Venue" required>
+                                    <button class="btn" type="submit" name="button">Update</button>
+                                </form>
+                            </div>
+                            <div class="form-group">
+                                <form class="" action="/venues/@Model["venue"].GetId()" method="post">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn red" type="submit" name="button">Delete Venue</button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
