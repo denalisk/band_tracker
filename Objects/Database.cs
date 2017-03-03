@@ -1,5 +1,6 @@
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 // using Microsoft.Scripting;
 
 namespace BandTrackerApp
@@ -23,6 +24,49 @@ namespace BandTrackerApp
             {
                 conn.Close();
             }
+        }
+
+        public static Dictionary<string, object> Search(string targetString)
+        {
+            // This function will search through both tables and return a list of all the relevant items
+            Dictionary<string, object> searchResults = new Dictionary<string, object>{};
+            List<Band> resultBands = new List<Band>{};
+            List<Venue> resultVenues = new List<Venue>{};
+
+            // Search Bands
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM bands WHERE name LIKE @TargetString;", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetString", "%" + targetString + "%"));
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                resultBands.Add(new Band(rdr.GetString(1), rdr.GetInt32(0)));
+            }
+
+            DB.CloseSqlConnection(conn, rdr);
+
+            // Search Venues
+            SqlConnection conn2 = DB.Connection();
+            conn2.Open();
+
+            SqlCommand cmd2 = new SqlCommand("SELECT * FROM venues WHERE name LIKE @TargetString;", conn2);
+            cmd2.Parameters.Add(new SqlParameter("@TargetString", "%" + targetString + "%"));
+            SqlDataReader rdr2 = cmd2.ExecuteReader();
+
+            while(rdr2.Read())
+            {
+                resultVenues.Add(new Venue(rdr2.GetString(1), rdr2.GetInt32(0)));
+            }
+
+            DB.CloseSqlConnection(conn2, rdr2);
+            // Compose dict results
+            searchResults.Add("bands", resultBands);
+            searchResults.Add("venues", resultVenues);
+
+            return searchResults;
         }
 
         // public static int CheckIsNew(string tableName, string targetColumnName, string targetName, [ParamDictionary] IAttributesCollection kwargs)

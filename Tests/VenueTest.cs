@@ -150,6 +150,26 @@ namespace BandTrackerApp
         }
 
         [Fact]
+        public void Search_LocateObjectsInDatabase_ReturnList()
+        {
+            // This test will check to see if the delete functionality of the program can successfully remove items from the join table
+            // arrange
+            Band newBand = new Band("Fire");
+            newBand.Save();
+            Venue newVenue = new Venue("Boston");
+            newVenue.Save();
+            Venue otherVenue = new Venue("Bosnia");
+            otherVenue.Save();
+
+            // act
+            Dictionary<string, object> searchResults = DB.Search("Bos");
+            List<Venue> expectedList = new List<Venue> {newVenue, otherVenue};
+
+            // assert
+            Assert.Equal(expectedList, searchResults["venues"]);
+        }
+
+        [Fact]
         public void TESTMETHOD_TESTFUNCTIONALITY_TESTRESULT()
         {
             // This test will ...................................................... by .........................
