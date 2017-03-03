@@ -66,6 +66,21 @@ namespace BandTrackerApp
         }
 
         [Fact]
+        public void Find_GetObjectFromDatabase_ReturnBand()
+        {
+            // This test will check to see if the programs Band.Find() method can get a band object from the database and return it
+            // arrange
+            Band newBand = new Band("Fire");
+            newBand.Save();
+
+            // act
+            Band foundBand = Band.Find(newBand.GetId());
+
+            // assert
+            Assert.Equal(newBand, foundBand);
+        }
+
+        [Fact]
         public void TESTMETHOD_TESTFUNCTIONALITY_TESTRESULT()
         {
             // This test will ...................................................... by .........................
