@@ -127,7 +127,7 @@ namespace BandTrackerApp
             otherBand.Save();
 
             // act
-            newBand.Delete()
+            newBand.Delete();
 
             // assert
             Assert.Equal(1, Band.GetAll().Count);

@@ -146,6 +146,12 @@ namespace BandTrackerApp
             return new Band(foundName, foundId);
         }
 
+        public void Delete()
+        {
+            // This function deletes instances of the local object from it's database and all associated databases
+            DB.Delete(this.GetId(), "bands", "band", "bands_venues");
+        }
+
         public static List<Band> GetAll()
         {
             // This function returns a list of all the bands in the DB
