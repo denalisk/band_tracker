@@ -81,6 +81,24 @@ namespace BandTrackerApp
         }
 
         [Fact]
+        public void Update_AlterDatabaseEntry_ReturnNewBand()
+        {
+            // This test will check to see if the Band.Update() method writes new values to the database and the returns the altered object to the local instance
+            // arrange
+            Band newBand = new Band("Fire");
+            newBand.Save();
+
+            Band otherBand = new Band("Water");
+
+            // act
+            newBand.Update("Water");
+            otherBand.SetId(newBand.GetId());
+
+            // assert
+            Assert.Equal(otherBand, Band.Find(newBand.GetId()));
+        }
+
+        [Fact]
         public void TESTMETHOD_TESTFUNCTIONALITY_TESTRESULT()
         {
             // This test will ...................................................... by .........................

@@ -104,6 +104,7 @@ namespace BandTrackerApp
 
         public static Band Find(int targetId)
         {
+            // This function will search the database for an existing entry with the passedId and return it
             SqlConnection conn = DB.Connection();
             conn.Open();
 
