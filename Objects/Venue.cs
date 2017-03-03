@@ -104,6 +104,7 @@ namespace BandTrackerApp
 
         public void Update(string newName)
         {
+            // This function updates the saved values associated with a venue entry in the database and rewrites the local values
             SqlConnection conn = DB.Connection();
             conn.Open();
 
