@@ -36,7 +36,7 @@ namespace BandTrackerApp
         }
 
         [Fact]
-        public void Save_ISavesToDBandAltersLocalObject_ReturnsNewIdentity()
+        public void Save_SavesToDBandAltersLocalObject_ReturnsNewIdentity()
         {
             // This test will check to see the save functionality for band works, to test that the program is writing to the database and assigning a new unique Id
             // arrange
@@ -47,6 +47,22 @@ namespace BandTrackerApp
 
             // assert
             Assert.Equal(newBand, Band.GetAll()[0]);
+        }
+
+        [Fact]
+        public void Save_DoesNotSaveDuplicate_NoAdditionalBands()
+        {
+            // This test will check to see the save functionality for band works, to test that the program is writing to the database and assigning a new unique Id
+            // arrange
+            Band newBand = new Band("Fire");
+            Band duplicateBand = new Band("Fire");
+
+            // act
+            newBand.Save();
+            duplicateBand.Save();
+
+            // assert
+            Assert.Equal(1, Band.GetAll().Count);
         }
 
         [Fact]
