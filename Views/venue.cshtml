@@ -1,0 +1,50 @@
+@{
+    Layout = "Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="add-band-holder col s4">
+        <div class="add-band-connection">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header">
+                        Add a Band to this Venue
+                    </div>
+                    <div class="collapsible-body">
+                        <form action="/venues_bands/@Model["venue"].GetId()" method="post">
+                            <select class="" name="add-band">
+                                @if(@Model["bands"].Count == 0)
+                                {
+                                    <option value="0">There are no bands listed</option>
+                                }
+                                else
+                                {
+                                    @foreach(var band in @Model["bands"])
+                                    {
+                                        <option value="@band.GetId()">@band.GetName()</option>
+                                    }
+                                }
+                            </select>
+                            <button class="btn" type="submit" name="button">Add</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="venue-holder page-content col s8">
+        <h1>@Model["venue"].GetName()</h1>
+        @if(@Model["venue"].GetBands().Count == 0)
+        {
+            <h4>Zero bands have played at this venue</h4>
+        }
+        else
+        {
+            <ul>Bands that have played here:
+                @foreach(var band in @Model["venue"].GetBands())
+                {
+                    <li><a href="/bands/@band.GetId()">@band.GetName()</a></li>
+                }
+            </ul>
+        }
+    </div>
+</div>

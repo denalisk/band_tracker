@@ -5,13 +5,23 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/css?family=Arapey" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="/Contents/css/styles.css" rel="stylesheet" type="text/css">
         <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
         <script type="text/javascript" src="/Contents/js/scripts.js"></script>
         <title></title>
     </head>
-    <body>
+    <body class="container">
+        <nav>
+            <div class="nav-wrapper blue">
+                <span class="brand-logo">Bands, Venues, and Joins, Oh My</span>
+                <ul id="nav-mobile" class="right">
+                    <li><em></em></li>
+                    <li><a href="/"><i class="material-icons left">store</i>Home</a></li>
+                </ul>
+            </div>
+        </nav>
         @RenderBody()
     </body>
 </html>

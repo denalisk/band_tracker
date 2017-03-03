@@ -4,6 +4,22 @@
 
 <div class="left-side">
     <h2>Bands</h2>
+    <div class="add-band">
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header">
+                    Add a Band
+                </div>
+                <div class="collapsible-body">
+                    <form action="/bands" method="post">
+                        <input type="text" name="new-band" placeholder="New Band Name" required>
+                        <button class="btn" type="submit" name="button">Add Band</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+
+    </div>
     @if(Model["bands"].Count == 0)
     {
         <h4>
@@ -13,7 +29,7 @@
     else
     {
         <ul>
-            @foreach(var venue in Model["bands"])
+            @foreach(var band in Model["bands"])
             {
                 <a href="bands/@band.GetId()"><h4>@band.GetName()</h4></a>
             }
@@ -23,6 +39,7 @@
 <div class="center-box">
     <div class="search-box">
         <div class="nav-wrapper">
+            Search
             <form class="" action="/search" method="get">
                 <div class="input-field">
                     <input id="search" type="search" required>
@@ -35,6 +52,22 @@
 </div>
 <div class="right-side">
     <h2>Venues</h2>
+    <div class="add-venue">
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header">
+                    Add a Venue
+                </div>
+                <div class="collapsible-body">
+                    <form action="/venues" method="post">
+                        <input type="text" name="new-venue" placeholder="New Venue Name" required>
+                        <button class="btn" type="submit" name="button">Add Venue</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+
+    </div>
     @if(Model["venues"].Count == 0)
     {
         <h4>
