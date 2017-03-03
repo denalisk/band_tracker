@@ -5,9 +5,9 @@ using Xunit;
 
 namespace BandTrackerApp
 {
-    public class BandTrackerTest : IDisposable
+    public class BandTest : IDisposable
     {
-        public BandTrackerTest()
+        public BandTest()
         {
             DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=band_tracker_test;Integrated Security=SSPI;";
         }
@@ -36,6 +36,20 @@ namespace BandTrackerApp
         }
 
         [Fact]
+        public void Save_ISavesToDBandAltersLocalObject_ReturnsNewIdentity()
+        {
+            // This test will check to see the save functionality for band works, to test that the program is writing to the database and assigning a new unique Id
+            // arrange
+            Band newBand = new Band("Fire");
+
+            // act
+            newBand.Save();
+
+            // assert
+            Assert.Equal(newBand, Band.GetAll()[0]);
+        }
+
+        [Fact]
         public void TESTMETHOD_TESTFUNCTIONALITY_TESTRESULT()
         {
             // This test will ...................................................... by .........................
@@ -46,14 +60,6 @@ namespace BandTrackerApp
             // assert
         }
 
-        [Fact]
-        public void Venue_DatabaseStartsEmpty_NothingInDatabase()
-        {
-            // This test will check to see if the database starts empty and the Dipsose method is working correctly
-            // arrange act assert
-            Assert.Equal(0, Venue.GetAll().Count);
-        }
-        
         public void Dispose()
         {
             Band.DeleteAll();

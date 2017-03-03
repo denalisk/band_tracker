@@ -50,6 +50,12 @@ namespace BandTrackerApp
             }
         }
 
+        public override int GetHashCode()
+        {
+            // This override alters the GetHashCode method to use the objects properties to navigate the hash tables
+            return this.GetName().GetHashCode();
+        }
+
         public static List<Band> GetAll()
         {
             // This function returns a list of all the bands in the DB
