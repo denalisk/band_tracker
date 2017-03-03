@@ -35,19 +35,26 @@
             </div>
         </div>
         <div class="band-holder page-content col s8">
-            <h1>@Model["band"].GetName()</h1>
+            <div class="card green center-align small-object">
+                <h1>@Model["band"].GetName()</h1>
+            </div>
+
             @if(@Model["band"].GetVenues().Count == 0)
             {
                 <h4>This band has played at zero venues</h4>
             }
             else
             {
-                <ul>Venues this band has played at:
+                <div class="card green lighten-1 small-object">
+                    <h4 class="small-object">Venues this band has played at:</h4>
                     @foreach(var venue in @Model["band"].GetVenues())
                     {
-                        <li><a href="/venues/@venue.GetId()">@venue.GetName()</a></li>
+                        <div class="card center-align small-object green lighten-3">
+                            <a href="/venues/@venue.GetId()"><h5>@venue.GetName()</h5></a>
+                        </div>
+
                     }
-                </ul>
+                </div>
             }
         </div>
     </div>

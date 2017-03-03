@@ -2,7 +2,7 @@
     Layout = "Shared/_Layout.cshtml";
 }
 <div class="my-container row">
-    <div class="left-side col s4 well my-box">
+    <div class="left-side my-box col s4 well">
         <h2>Bands</h2>
         <div class="add-band">
             <ul class="collapsible" data-collapsible="accordion">
@@ -39,7 +39,7 @@
     <div class="center-box my-box">
         <div class="search-box">
             <div class="nav-wrapper indigo lighten-2">
-                <form class="" action="/search" method="get">
+                <form class="" action="/search" method="post">
                     <div class="input-field">
                         <input id="search" type="search" placeholder="Search for a band or venue" name="search" required>
                         <label class="label-icon" for="search"><i class="material-icons">search</i></label>

@@ -16,7 +16,7 @@ namespace BandTrackerApp
                 return View["index.cshtml", ModelMaker()];
             };
 
-            Get["/search"] = _ =>
+            Post["/search"] = _ =>
             {
                 return View["search.cshtml", DB.Search(Request.Form["search"])];
             };

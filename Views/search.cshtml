@@ -2,9 +2,11 @@
     Layout = "Shared/_Layout.cshtml";
 }
 <div class="my-container row">
-    <div class="card col s6">
-        <h4>Bands that match your search: </h4>
-        <div class="found-bands">
+    <div class="card col s5 my-box">
+        <div class="card green lighten-2 small-object">
+            <h4>Bands that match your search: </h4>
+        </div>
+        <div class="center-align found-bands">
             @if(Model["bands"].Count == 0)
             {
                 <h4>
@@ -16,15 +18,18 @@
                 <ul>
                 @foreach(var band in Model["bands"])
                 {
-                    <a href="bands/@band.GetId()"><h4>@band.GetName()</h4></a>
+                    <li><a href="bands/@band.GetId()"><h4>@band.GetName()</h4></a></li>
+                    <hr />
                 }
                 </ul>
             }
         </div>
     </div>
-    <div class="card col s6">
-        <h4>Venues that match your search:</h4>
-        <div class="found-venues">
+    <div class="my-box card col s5 offset-s2">
+        <div class="card green lighten-2 small-object">
+            <h4>Venues that match your search:</h4>
+        </div>
+        <div class="center-align found-venues">
             @if(Model["venues"].Count == 0)
             {
                 <h4>
@@ -36,7 +41,8 @@
                 <ul>
                 @foreach(var venue in Model["venues"])
                 {
-                    <a href="venues/@venue.GetId()"><h4>@venue.GetName()</h4></a>
+                    <li><a href="venues/@venue.GetId()"><h4>@venue.GetName()</h4></a></li>
+                    <hr />
                 }
                 </ul>
             }

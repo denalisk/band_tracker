@@ -1,3 +1,22 @@
+html, body {
+    height: 100%;
+    background-color: #eff2da;
+}
+
+div.small-object {
+    padding: 20px;
+}
+
+span.brand-logo {
+    padding-left: 30px;
+}
+
+.topper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
 .my-container {
     margin: 0 auto;
     width: 95%;
