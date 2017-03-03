@@ -112,7 +112,7 @@ namespace BandTrackerApp
             newBand.AddVenue(newVenue);
 
             // assert
-            Assert.Equal(1, newBand.GetVenues().Count);
+            Assert.Equal(newVenue, newBand.GetVenues()[0]);
         }
 
         [Fact]

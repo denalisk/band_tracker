@@ -98,6 +98,23 @@ namespace BandTrackerApp
         }
 
         [Fact]
+        public void AddBand_AlterJoinTable_IncrementVenueBands()
+        {
+            // This test will check to see if the program can successfully write to the join table and add a connection between VENUES and BANDS
+            // arrange
+            Band newBand = new Band("Fire");
+            newBand.Save();
+            Venue newVenue = new Venue("Boston");
+            newVenue.Save();
+
+            // act
+            newVenue.AddBand(newBand);
+
+            // assert
+            Assert.Equal(newBand, newVenue.GetBands()[0]);
+        }
+
+        [Fact]
         public void TESTMETHOD_TESTFUNCTIONALITY_TESTRESULT()
         {
             // This test will ...................................................... by .........................
