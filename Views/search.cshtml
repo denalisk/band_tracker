@@ -1,0 +1,45 @@
+@{
+    Layout = "Shared/_Layout.cshtml";
+}
+<div class="my-container row">
+    <div class="card col s6">
+        <h4>Bands that match your search: </h4>
+        <div class="found-bands">
+            @if(Model["bands"].Count == 0)
+            {
+                <h4>
+                No bands matched your search
+                </h4>
+            }
+            else
+            {
+                <ul>
+                @foreach(var band in Model["bands"])
+                {
+                    <a href="bands/@band.GetId()"><h4>@band.GetName()</h4></a>
+                }
+                </ul>
+            }
+        </div>
+    </div>
+    <div class="card col s6">
+        <h4>Venues that match your search:</h4>
+        <div class="found-venues">
+            @if(Model["venues"].Count == 0)
+            {
+                <h4>
+                No venues matched your search
+                </h4>
+            }
+            else
+            {
+                <ul>
+                @foreach(var venue in Model["venues"])
+                {
+                    <a href="venues/@venue.GetId()"><h4>@venue.GetName()</h4></a>
+                }
+                </ul>
+            }
+        </div>
+    </div>
+</div>

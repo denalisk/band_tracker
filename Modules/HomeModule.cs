@@ -16,6 +16,11 @@ namespace BandTrackerApp
                 return View["index.cshtml", ModelMaker()];
             };
 
+            Get["/search"] = _ =>
+            {
+                return View["search.cshtml", DB.Search(Request.Form["search"])];
+            };
+
             Post["/bands"] = _ =>
             {
                 Band newBand = new Band(Request.Form["new-band"]);
@@ -42,6 +47,24 @@ namespace BandTrackerApp
                 Dictionary<string, object> model = ModelMaker();
                 model.Add("venue", Venue.Find(parameters.id));
                 return View["venue.cshtml", model];
+            };
+
+            Post["/venue_bands/{id}"] = parameters =>
+            {
+                Venue newVenue = Venue.Find(parameters.id);
+                newVenue.AddBand(Band.Find(Request.Form["add-band"]));
+                Dictionary<string, object> model = ModelMaker();
+                model.Add("venue", newVenue);
+                return View["venue.cshtml", model];
+            };
+
+            Post["/band_venues/{id}"] = parameters =>
+            {
+                Band newBand = Band.Find(parameters.id);
+                newBand.AddVenue(Venue.Find(Request.Form["add-venue"]));
+                Dictionary<string, object> model = ModelMaker();
+                model.Add("band", newBand);
+                return View["band.cshtml", model];
             };
         }
 
