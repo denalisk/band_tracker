@@ -73,7 +73,7 @@ namespace BandTrackerApp
             {
                 potentialId = rdr.GetInt32(0);
             }
-            DB.CloseSqlConnection(conn);
+            DB.CloseSqlConnection(conn, rdr);
 
             return potentialId;
 
@@ -97,7 +97,7 @@ namespace BandTrackerApp
                 {
                     potentialId = rdr.GetInt32(0);
                 }
-                DB.CloseSqlConnection(conn);
+                DB.CloseSqlConnection(conn, rdr);
             }
             this.SetId(potentialId);
         }
@@ -118,7 +118,7 @@ namespace BandTrackerApp
             {
                 this.SetName(rdr.GetString(0));
             }
-            DB.CloseSqlConnection(conn);
+            DB.CloseSqlConnection(conn, rdr);
         }
 
         public static Band Find(int targetId)
@@ -141,7 +141,7 @@ namespace BandTrackerApp
                 foundName = rdr.GetString(1);
             }
 
-            DB.CloseSqlConnection(conn);
+            DB.CloseSqlConnection(conn, rdr);
 
             return new Band(foundName, foundId);
         }
@@ -166,6 +166,42 @@ namespace BandTrackerApp
             return allBands;
         }
 
+        public void AddVenue(Venue newVenue)
+        {
+            // This function will add a connection between the BAND and the VENUE in the join table
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM bands_venues WHERE band_id = @NewBandId AND venue_id = @NewVenueId; INSERT INTO bands_venues (band_id, venue_id) VALUES (@NewBandId, @NewVenueId);", conn);
+            cmd.Parameters.Add(new SqlParameter("@NewBandId", this.GetId()));
+            cmd.Parameters.Add(new SqlParameter("@NewVenueId", newVenue.GetId()));
+
+            cmd.ExecuteNonQuery();
+
+            DB.CloseSqlConnection(conn);
+        }
+
+        public List<Venue> GetVenues()
+        {
+            // This function will return a list of all venues associated with the band
+            List<Venue> bandVenues = new List<Venue>{};
+
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT venues.* FROM bands JOIN bands_venues ON (bands.id = bands_venues.band_id) JOIN venues ON (venues.id = bands_venues.venue_id) WHERE band_id = @TargetId;", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                bandVenues.Add(new Venue(rdr.GetString(1), rdr.GetInt32(0)));
+            }
+
+            DB.CloseSqlConnection(conn, rdr);
+            return bandVenues;
+        }
 
         public static void DeleteAll()
         {

@@ -73,7 +73,7 @@ namespace BandTrackerApp
             {
                 potentialId = rdr.GetInt32(0);
             }
-            DB.CloseSqlConnection(conn);
+            DB.CloseSqlConnection(conn, rdr);
 
             return potentialId;
 
@@ -97,7 +97,7 @@ namespace BandTrackerApp
                 {
                     potentialId = rdr.GetInt32(0);
                 }
-                DB.CloseSqlConnection(conn);
+                DB.CloseSqlConnection(conn, rdr);
             }
             this.SetId(potentialId);
         }
@@ -141,7 +141,7 @@ namespace BandTrackerApp
                 foundName = rdr.GetString(1);
             }
 
-            DB.CloseSqlConnection(conn);
+            DB.CloseSqlConnection(conn, rdr);
 
             return new Venue(foundName, foundId);
         }
@@ -169,5 +169,22 @@ namespace BandTrackerApp
         {
             DB.DeleteAll("venues");
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
