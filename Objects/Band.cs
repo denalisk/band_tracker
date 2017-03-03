@@ -102,6 +102,24 @@ namespace BandTrackerApp
             this.SetId(potentialId);
         }
 
+        public void Update(string newName)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE bands SET name = @NewName OUTPUT INSERTED.name WHERE id = @TargetId;", conn);
+            cmd.Parameters.Add(new SqlParameter("@NewName", newName));
+            cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                this.SetName(rdr.GetString(0));
+            }
+            DB.CloseSqlConnection(conn);
+        }
+
         public static Band Find(int targetId)
         {
             // This function will search the database for an existing entry with the passedId and return it
