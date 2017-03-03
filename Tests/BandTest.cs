@@ -133,23 +133,23 @@ namespace BandTrackerApp
             Assert.Equal(1, Band.GetAll().Count);
         }
 
-        // [Fact]
-        // public void Delete_RemoveFromJoinTable_DecrementDatabase()
-        // {
-        //     // This test will check to see if the delete functionality of the program can successfully remove items from the join table
-        //     // arrange
-        //     Band newBand = new Band("Fire");
-        //     newBand.Save();
-        //     Venue newVenue = new Venue("Boston");
-        //     newVenue.Save();
-        //
-        //     // act
-        //     newBand.AddVenue(newVenue);
-        //     newBand.Delete()
-        //
-        //     // assert
-        //     Assert.Equal(0, newVenue.GetBands().Count);
-        // }
+        [Fact]
+        public void Delete_RemoveFromJoinTable_DecrementDatabase()
+        {
+            // This test will check to see if the delete functionality of the program can successfully remove items from the join table
+            // arrange
+            Band newBand = new Band("Fire");
+            newBand.Save();
+            Venue newVenue = new Venue("Boston");
+            newVenue.Save();
+
+            // act
+            newBand.AddVenue(newVenue);
+            newBand.Delete();
+
+            // assert
+            Assert.Equal(0, newVenue.GetBands().Count);
+        }
 
         [Fact]
         public void TESTMETHOD_TESTFUNCTIONALITY_TESTRESULT()
