@@ -59,7 +59,23 @@ namespace BandTrackerApp
         public int IsNewEntry()
         {
             // This function checks to see if the object instance already exists in the database, returning the DB id if it already exists and -1 if it does not
-            return -1;
+            int potentialId = -1;
+
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT id FROM bands WHERE name = @TargetName", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetName", this.GetName()));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                potentialId = rdr.GetInt32(0);
+            }
+            DB.CloseSqlConnection(conn);
+
+            return potentialId;
 
         }
 
