@@ -102,6 +102,30 @@ namespace BandTrackerApp
             this.SetId(potentialId);
         }
 
+        public static Band Find(int targetId)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM bands WHERE id = @TargetId", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetId", targetId));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int foundId = 0;
+            string foundName = null;
+
+            while(rdr.Read())
+            {
+                foundId = rdr.GetInt32(0);
+                foundName = rdr.GetString(1);
+            }
+
+            DB.CloseSqlConnection(conn);
+
+            return new Band(foundName, foundId);
+        }
+
         public static List<Band> GetAll()
         {
             // This function returns a list of all the bands in the DB
