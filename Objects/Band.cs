@@ -56,6 +56,36 @@ namespace BandTrackerApp
             return this.GetName().GetHashCode();
         }
 
+        public int IsNewEntry()
+        {
+            // This function checks to see if the object instance already exists in the database, returning the DB id if it already exists and -1 if it does not
+            return -1;
+
+        }
+
+        public void Save()
+        {
+            // This function saves a band object to a database if it is a new band objects
+            int potentialId = this.IsNewEntry();
+            if (potentialId == -1)
+            {
+                SqlConnection conn = DB.Connection();
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("INSERT INTO bands (name) OUTPUT INSERTED.id VALUES (@NewName);", conn);
+                cmd.Parameters.Add(new SqlParameter("@NewName", this.GetName()));
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while(rdr.Read())
+                {
+                    potentialId = rdr.GetInt32(0);
+                }
+                DB.CloseSqlConnection(conn);
+            }
+            this.SetId(potentialId);
+        }
+
         public static List<Band> GetAll()
         {
             // This function returns a list of all the bands in the DB
