@@ -21,6 +21,83 @@ namespace BandTrackerApp
         }
 
         [Fact]
+        public void Venue_IdentityTest_CheckIfObjectsAreIdentitcal()
+        {
+            // This test will check to see if the overwritten .Equals function for the object can detect identical objects
+            // arrange
+            Venue newVenue = new Venue("Fire");
+
+            // act
+            Venue duplicateVenue = new Venue("Fire");
+
+            // assert
+            Assert.Equal(newVenue, duplicateVenue);
+        }
+
+        [Fact]
+        public void Save_SavesToDVenueAltersLocalObject_ReturnsNewIdentity()
+        {
+            // This test will check to see the save functionality for venue works, to test that the program is writing to the database and assigning a new unique Id
+            // arrange
+            Venue newVenue = new Venue("Fire");
+
+            // act
+            newVenue.Save();
+
+            // assert
+            Assert.Equal(newVenue, Venue.GetAll()[0]);
+        }
+
+        [Fact]
+        public void Save_DoesNotSaveDuplicate_NoAdditionalVenues()
+        {
+            // This test will check to see the save functionality for venue works, to test that the program is writing to the database and assigning a new unique Id
+            // arrange
+            Venue newVenue = new Venue("Fire");
+            Venue duplicateVenue = new Venue("Fire");
+
+            // act
+            newVenue.Save();
+            duplicateVenue.Save();
+
+            // assert
+            Assert.Equal(1, Venue.GetAll().Count);
+        }
+
+        [Fact]
+        public void Find_GetObjectFromDatabase_ReturnVenue()
+        {
+            // This test will check to see if the programs Venue.Find() method can get a venue object from the database and return it
+            // arrange
+            Venue newVenue = new Venue("Fire");
+            newVenue.Save();
+
+            // act
+            Venue foundVenue = Venue.Find(newVenue.GetId());
+
+            // assert
+            Assert.Equal(newVenue, foundVenue);
+        }
+
+        [Fact]
+        public void Update_AlterDatabaseEntry_ReturnNewVenue()
+        {
+            // This test will check to see if the Venue.Update() method writes new values to the database and the returns the altered object to the local instance
+            // arrange
+            Venue newVenue = new Venue("Fire");
+            newVenue.Save();
+
+            Venue otherVenue = new Venue("Water");
+
+            // act
+            newVenue.Update("Water");
+            otherVenue.SetId(newVenue.GetId());
+
+            // assert
+            Assert.Equal(otherVenue, Venue.Find(newVenue.GetId()));
+        }
+
+        [Fact]
         public void TESTMETHOD_TESTFUNCTIONALITY_TESTRESULT()
         {
             // This test will ...................................................... by .........................
@@ -33,7 +110,7 @@ namespace BandTrackerApp
 
         public void Dispose()
         {
-            Band.DeleteAll();
+            Venue.DeleteAll();
             Venue.DeleteAll();
         }
     }

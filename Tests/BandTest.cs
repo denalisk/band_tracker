@@ -98,6 +98,24 @@ namespace BandTrackerApp
             Assert.Equal(otherBand, Band.Find(newBand.GetId()));
         }
 
+        // [Fact]
+        // public void AddVenue_AlterJoinTable_IncrementBandVenues()
+        // {
+        //     // This test will check to see if the program can successfully write to the join table and add a connection between VENUES and BANDS
+        //     // arrange
+        //     Band newBand = new Band("Fire");
+        //     newBand.Save();
+        //
+        //     Band otherBand = new Band("Water");
+        //
+        //     // act
+        //     newBand.Update("Water");
+        //     otherBand.SetId(newBand.GetId());
+        //
+        //     // assert
+        //     Assert.Equal(otherBand, Band.Find(newBand.GetId()));
+        // }
+
         [Fact]
         public void TESTMETHOD_TESTFUNCTIONALITY_TESTRESULT()
         {
