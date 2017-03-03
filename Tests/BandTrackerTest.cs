@@ -13,6 +13,14 @@ namespace BandTrackerApp
         }
 
         [Fact]
+        public void Band_DatabaseStartsEmpty_NothingInDatabase()
+        {
+            // This test will check to see if the database starts empty and the Dipsose method is working correctly
+            // arrange act assert
+            Assert.Equal(0, Band.GetAll().Count);
+        }
+
+        [Fact]
         public void TESTMETHOD_TESTFUNCTIONALITY_TESTRESULT()
         {
             // This test will ...................................................... by .........................
